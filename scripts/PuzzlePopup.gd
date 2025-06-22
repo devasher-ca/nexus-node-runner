@@ -183,9 +183,9 @@ func _calculate_time_limit(type: PuzzleType, game_manager):
 	
 	# Base time limits for each puzzle type at level 1 (generous starting times)
 	var base_times = {
-		PuzzleType.PATTERN_MATCH: 20.0,    # Hardest puzzle gets most time initially
+		PuzzleType.PATTERN_MATCH: 15.0,    # Hardest puzzle gets most time initially
 		PuzzleType.SEQUENCE_MEMORY: 10.0,  # Memory puzzle gets medium time  
-		PuzzleType.LOGIC_GATE: 12.0        # Logic puzzle gets least time (easiest)
+		PuzzleType.LOGIC_GATE: 8.0        # Logic puzzle gets least time (easiest)
 	}
 	
 	# Calculate time reduction per level (gets progressively harder)

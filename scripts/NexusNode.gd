@@ -109,6 +109,9 @@ func _check_activation_conditions():
 	# Check if player has enough shards and is ready to activate
 	if current_state == NodeState.INACTIVE and player.shards_collected >= required_shards:
 		current_state = NodeState.READY
+	# Check if player no longer has enough shards and should go back to inactive
+	elif current_state == NodeState.READY and player.shards_collected < required_shards:
+		current_state = NodeState.INACTIVE
 	
 	# If state changed, update visuals
 	if old_state != current_state:
@@ -116,6 +119,8 @@ func _check_activation_conditions():
 
 func _on_state_changed():
 	match current_state:
+		NodeState.INACTIVE:
+			_hide_ready_indicator()
 		NodeState.READY:
 			_show_ready_indicator()
 		NodeState.ACTIVE:
@@ -128,11 +133,15 @@ func _show_ready_indicator():
 	if not $ReadyLabel:
 		var label = Label.new()
 		label.name = "ReadyLabel"
-		label.text = "READY TO ACTIVATE"
+		label.text = "READY TO ACTIVATE PRESS E"
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		label.position = Vector2(-64, -80)
 		label.modulate = Color.YELLOW
 		add_child(label)
+
+func _hide_ready_indicator():
+	if $ReadyLabel:
+		$ReadyLabel.queue_free()
 
 func _show_active_indicator():
 	if $ReadyLabel:
@@ -151,12 +160,24 @@ func _show_completed_indicator():
 func activate():
 	if current_state != NodeState.READY:
 		return false
+
+	# Re-check shard count at the moment of interaction
+	var player = get_tree().get_first_node_in_group("player")
+	if not player:
+		return false
+	
+	# Check if player has enough shards to activate
+	if player.shards_collected < required_shards:
+		current_state = NodeState.INACTIVE
+		_on_state_changed()
+		return false
 	
 	# Check if game is over - disable activation
 	var game_manager = get_tree().get_first_node_in_group("game_manager")
 	if game_manager and game_manager.current_state == game_manager.GameState.GAME_OVER:
 		return false
 	
+	# Only activate if we have enough shards
 	current_state = NodeState.ACTIVE
 	puzzle_requested.emit(self)
 	return true
