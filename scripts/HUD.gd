@@ -27,10 +27,11 @@ func _setup_hud():
 	shard_panel.position = Vector2(20, 20)
 	add_child(shard_panel)
 	
-	var shard_icon = Label.new()
-	shard_icon.text = "💎"
-	shard_icon.position = Vector2(10, 15)
-	shard_icon.add_theme_font_size_override("font_size", 24)
+	var shard_icon = TextureRect.new()
+	shard_icon.texture = load("res://assets/sprites/shard_icon.png")
+	shard_icon.position = Vector2(8, 10)
+	shard_icon.size = Vector2(32, 32)
+	shard_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	shard_panel.add_child(shard_icon)
 	
 	shard_count_label = Label.new()
@@ -52,10 +53,11 @@ func _setup_hud():
 	lives_panel.position = Vector2(440, 20)
 	add_child(lives_panel)
 	
-	var heart_icon = Label.new()
-	heart_icon.text = "❤️"
-	heart_icon.position = Vector2(10, 15)
-	heart_icon.add_theme_font_size_override("font_size", 24)
+	var heart_icon = TextureRect.new()
+	heart_icon.texture = load("res://assets/sprites/heart_icon.png")
+	heart_icon.position = Vector2(8, 10)
+	heart_icon.size = Vector2(32, 32)
+	heart_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	lives_panel.add_child(heart_icon)
 	
 	lives_label = Label.new()
@@ -65,10 +67,11 @@ func _setup_hud():
 	lives_label.modulate = Color.RED
 	lives_panel.add_child(lives_label)
 	
-	var nodes_icon = Label.new()
-	nodes_icon.text = "🔷"
-	nodes_icon.position = Vector2(10, 15)
-	nodes_icon.add_theme_font_size_override("font_size", 24)
+	var nodes_icon = TextureRect.new()
+	nodes_icon.texture = load("res://assets/sprites/node_icon.png")
+	nodes_icon.position = Vector2(8, 10)
+	nodes_icon.size = Vector2(32, 32)
+	nodes_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	progress_panel.add_child(nodes_icon)
 	
 	level_progress_label = Label.new()

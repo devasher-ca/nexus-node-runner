@@ -242,7 +242,7 @@ func _generate_pattern_match():
 			for i in puzzle_size:
 				target_pattern.append(base_pattern[puzzle_size - 1 - i])
 		2: # XOR: XOR with a fixed mask
-			instruction_label.text = "XOR: Apply mask to each bit (0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0)"
+			instruction_label.text = "XOR: Apply mask to each bit (0^0=0, 0^1=1, 1^0=1, 1^1=0)"
 			var mask = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]  # Alternating pattern
 			for i in puzzle_size:
 				target_pattern.append((base_pattern[i] + mask[i]) % 2)  # XOR operation
@@ -276,7 +276,7 @@ func _generate_pattern_match():
 		
 		# Show separator line
 		var separator = Label.new()
-		separator.text = "────────────────────────────────"
+		separator.text = "--------------------------------"
 		separator.add_theme_font_size_override("font_size", 12)
 		separator.modulate = Color.GRAY
 		pattern_container.add_child(separator)
@@ -332,10 +332,10 @@ func _show_sequence_briefly():
 		button.disabled = true
 		if target_pattern[i] == 1:
 			button.modulate = Color.YELLOW
-			button.text = "★"
+			button.text = "1"
 		else:
 			button.modulate = Color.DARK_GRAY
-			button.text = "○"
+			button.text = "0"
 		pattern_container.add_child(button)
 	
 	# Create player input buttons (initially hidden)
