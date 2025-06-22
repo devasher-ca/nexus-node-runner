@@ -36,7 +36,7 @@ var shards_lost_on_death = 2
 var puzzle_failure_penalty = 1
 
 # Level timer for extreme difficulty
-var level_time_limit = 1450.0  # Only 45 seconds per level!
+var level_time_limit = 90.0  # Only 45 seconds per level!
 var level_timer = 0.0
 
 # Signals
